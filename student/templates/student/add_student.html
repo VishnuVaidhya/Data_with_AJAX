@@ -1,0 +1,42 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+
+<form action="" method="post" style="width:600px; margin-left:400px; " class="jumbotron" id="student_form"
+      enctype="multipart/form-data">
+    {% csrf_token %}
+    <h4>ADD Student Data</h4>
+    {{form.media}}
+    {{form.as_p}}
+    <input type="submit" value="Submit">
+</form>
+<script type="text/javascript" src="{% static 'js/material.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script  src="{% static 'js/app.js' %}"></script>
+<script type="text/javascript">
+
+    $(document).on('submit','#student_form',function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type:'POST',
+            url:'student-add/',
+            data:{
+                student_name:$('#student_name').val(),
+                student_image:$('#student_image').val(),
+                enroll_number:$('#enroll_number').val(),
+                gender:$('#gender').val(),
+                hobbies:$('#hobbies').val(),
+                city:$('#city').val(),
+                state:$('#state').val(),
+                country:$('#country').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success:function(){
+                alert("student data submitted");
+            }
+
+        })
+
+</script>
+{% endblock %}
