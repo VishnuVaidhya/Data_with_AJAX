@@ -6,6 +6,7 @@ from . forms import StudentForm, Student
 # Create your views here.
 
 def Home(request):
+    print("hi")
     return render(request, 'student/base.html')
 
 def Register(request):
